@@ -18,11 +18,16 @@ public class Customer {
     private String emailId;
 
     //    Many Addresses
-    @OneToMany(mappedBy = "customer")
-    private List<Address> addresses;
-    //    Many payments
-//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Payment> payments;
+    @OneToOne(mappedBy = "customer")
+    private Address addresse;
+
+    public Address getAddresse() {
+        return addresse;
+    }
+
+    public void setAddresse(Address addresse) {
+        this.addresse = addresse;
+    }
 
     public Long getCustomerId() {
         return customerId;
@@ -55,23 +60,6 @@ public class Customer {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
-
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
-
-//    public List<Payment> getPayments() {
-//        return payments;
-//    }
-//
-//    public void setPayments(List<Payment> payments) {
-//        this.payments = payments;
-//    }
-
 
 }
 

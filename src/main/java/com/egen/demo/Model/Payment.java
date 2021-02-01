@@ -21,6 +21,18 @@ public class Payment {
     @Column(name = "payment_date")
     private Date paymentDate;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Order.class)
+    @JoinColumn(name = "order_id", nullable = false)
+    @JsonIgnore
+    private Order order;
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     public Long getPaymentId() {
         return paymentId;

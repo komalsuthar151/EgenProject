@@ -1,5 +1,7 @@
 package com.egen.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,8 +24,9 @@ public class Address {
     private String zipCode;
 
     //    customer id
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Customer.class)
+    @JoinColumn(name = "customer_id", nullable = false)
+    @JsonIgnore
     private Customer customer;
 
     public Long getAddressId() {
