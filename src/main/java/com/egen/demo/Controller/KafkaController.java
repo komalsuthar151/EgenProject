@@ -19,7 +19,7 @@ public class KafkaController {
     @GetMapping("/publish/{id}")
     public String post(@PathVariable("id") final String id) {
 
-        kafkaTemplate.send(TOPIC, new Order(id, "komal","kkk@gmail.com"));
+            kafkaTemplate.send(TOPIC, new Order( "2",  "komal","kkk@gmail.com"));
 
         return "Published successfully";
     }
