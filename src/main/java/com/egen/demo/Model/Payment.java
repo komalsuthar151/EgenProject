@@ -12,26 +12,32 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long paymentId;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Item.class)
+    @JoinColumn(name = "item_id", nullable = false)
+    @JsonIgnore
+    private Item item;
+
     @Column(name = "payment_method")
     private String paymentMethod;
-    @Column(name = "card_number")
-    private Long cardNumber;
-    @Column(name = "payment_amount")
-    private Double paymentAmount;
     @Column(name = "payment_date")
     private Date paymentDate;
+    @Column(name = "payment_confirmation_number")
+    private String paymentConfirmationNumber;
+    @Column(name = "payment_amount")
+    private Double paymentAmount;
+    @Column(name = "payment_card_number")
+    private String paymentCardNumber;
+    @Column(name = "payment_card_cvv")
+    private String paymentCardCVV;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Order.class)
-    @JoinColumn(name = "order_id", nullable = false)
-    @JsonIgnore
-    private Order order;
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
+    public Payment(String paymentMethod, Date paymentDate, String paymentConfirmationNumber, Double paymentAmount, String paymentCardNumber, String paymentCardCVV) {
+        this.paymentMethod = paymentMethod;
+        this.paymentDate = paymentDate;
+        this.paymentConfirmationNumber = paymentConfirmationNumber;
+        this.paymentAmount = paymentAmount;
+        this.paymentCardNumber = paymentCardNumber;
+        this.paymentCardCVV = paymentCardCVV;
     }
 
     public Long getPaymentId() {
@@ -50,12 +56,20 @@ public class Payment {
         this.paymentMethod = paymentMethod;
     }
 
-    public Long getCardNumber() {
-        return cardNumber;
+    public Date getPaymentDate() {
+        return paymentDate;
     }
 
-    public void setCardNumber(Long cardNumber) {
-        this.cardNumber = cardNumber;
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public String getPaymentConfirmationNumber() {
+        return paymentConfirmationNumber;
+    }
+
+    public void setPaymentConfirmationNumber(String paymentConfirmationNumber) {
+        this.paymentConfirmationNumber = paymentConfirmationNumber;
     }
 
     public Double getPaymentAmount() {
@@ -66,12 +80,27 @@ public class Payment {
         this.paymentAmount = paymentAmount;
     }
 
-    public Date getPaymentDate() {
-        return paymentDate;
+    public String getPaymentCardNumber() {
+        return paymentCardNumber;
     }
 
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
+    public void setPaymentCardNumber(String paymentCardNumber) {
+        this.paymentCardNumber = paymentCardNumber;
     }
 
+    public String getPaymentCardCVV() {
+        return paymentCardCVV;
+    }
+
+    public void setPaymentCardCVV(String paymentCardCVV) {
+        this.paymentCardCVV = paymentCardCVV;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
 }

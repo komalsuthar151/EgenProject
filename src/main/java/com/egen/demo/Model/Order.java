@@ -12,57 +12,62 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long orderId;
-    @Column(name = "subtotal")
-    private double subtotal;
-    @Column(name = "tax")
-    private double tax;
-    @Column(name = "total")
-    private double total;
-    @Column(name = "payment_confirmation_number")
-    private Long paymentConfirmatioNumber;
-    @Enumerated(EnumType.ORDINAL)
-    private Status status;
-    @Enumerated(EnumType.ORDINAL)
-    private ShippingMethods shippingMethods;
-
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Customer customer;
+    @Column(name = "customer_id")
+    private String customerId;
+    @Column(name = "customer_name")
+    private String customerName;
+    @Column(name = "customer_email")
+    private String customerEmail;
+    @Column(name = "status")
+    private String status;
+    @Column(name = "created_date")
+    private Date createdDate;
+    @Column(name = "modified_date")
+    private Date modifiedDate;
+    @Column(name = "notes")
+    private String notes;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Payment> payments;
+    private List<Item> items;
 
-    public Customer getCustomer() {
-        return customer;
+    public Order() {
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public Order(Long orderId, String customerId, String customerName, String customerEmail) {
+        this.orderId = orderId;
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+    }
+    public Order(String customerId, String customerName, String customerEmail) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
     }
 
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.valueOf(orderId));
+        stringBuilder.append(", ");
+        stringBuilder.append(customerId);
+        stringBuilder.append(", ");
+        stringBuilder.append(customerName);
+        stringBuilder.append(", ");
+        stringBuilder.append(customerEmail);
+        stringBuilder.append(", ");
+        stringBuilder.append(customerEmail);
+        stringBuilder.append(", ");
+        stringBuilder.append(status);
+        stringBuilder.append(", ");
+        stringBuilder.append(createdDate);
+        stringBuilder.append(", ");
+        stringBuilder.append(modifiedDate);
+        stringBuilder.append(", ");
+        stringBuilder.append(notes);
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public ShippingMethods getShippingMethods() {
-        return shippingMethods;
-    }
-
-    public void setShippingMethods(ShippingMethods shippingMethods) {
-        this.shippingMethods = shippingMethods;
-    }
-
-    public List<Payment> getPayments() {
-        return payments;
-    }
-
-    public void setPayments(List<Payment> payments) {
-        this.payments = payments;
+        return stringBuilder.toString();
     }
 
     public Long getOrderId() {
@@ -73,36 +78,69 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public double getSubtotal() {
-        return subtotal;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
-    public double getTax() {
-        return tax;
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
-    public void setTax(double tax) {
-        this.tax = tax;
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
-    public double getTotal() {
-        return total;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public Long getPaymentConfirmatioNumber() {
-        return paymentConfirmatioNumber;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setPaymentConfirmatioNumber(Long paymentConfirmatioNumber) {
-        this.paymentConfirmatioNumber = paymentConfirmatioNumber;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public Date getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
+
 
 }
